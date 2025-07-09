@@ -1,9 +1,3 @@
-<!--
-  Core Framework - View File
-
-  @license    MIT (https://mit-license.org/)
-  @author     Louis Ouellet <louis@laswitchtech.com>
--->
 <div class="col-12">
     <div class="row row-cols-4" id="grid">
         <?php foreach($this->Builder->menu('library') as $route => $nav): ?>
