@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Core Framework - LibraryModel
- *
- * @license    MIT (https://mit-license.org/)
- * @author     Louis Ouellet <louis@laswitchtech.com>
- */
-
 // Import additionnal class into the global namespace
 use \LaswitchTech\Core\Abstracts\Model;
 
@@ -18,7 +11,7 @@ class LibraryModel extends Model {
         $result = [];
 
         // List of Libraries
-        $libraries = ['countries','states','industries','tags'];
+        $libraries = ['countries','states','industries','tags','currencies'];
 
         // Loop through the Libraries
         foreach($libraries as $library){
