@@ -30,11 +30,18 @@ class LibraryEndpoint extends Endpoint {
      */
     public function fetchAction(): array
     {
+        // Import Global Variables
+        global $LOCALE;
+
         // Set the default message
         $message = ["status" => 200, "message" => "OK", "data" => []];
 
         // Retrieve the libraries
         $libraries = $this->Model->Library->fetch();
+
+        // Retrieve Locales
+        $libraries['locales'] = $LOCALE->list();
+        $libraries['timezones'] = $LOCALE->timezones();
 
         // Initialize the options
         $options = [];
@@ -52,6 +59,12 @@ class LibraryEndpoint extends Endpoint {
                     case 'industries':
                     case 'tags':
                         $options[$library][] = ["id" => $record['name'],"text" => $record['name']];
+                        break;
+                    case 'locales':
+                        $options[$library][] = ["id" => $key,"text" => $record];
+                        break;
+                    case 'timezones':
+                        $options[$library][] = ["id" => $record,"text" => $record];
                         break;
                     default:
                         $options[$library][] = ["id" => $record['id'],"text" => $record['name']];
