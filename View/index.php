@@ -1,28 +1,20 @@
-<div class="col-12">
-    <div class="row row-cols-4" id="grid">
-        <?php foreach($this->Builder->menu('library') as $route => $nav): ?>
-            <?php if (strpos($route, '.') !== false) { $url = 'https://'.$nav['link']; } else { $url = $nav['link']; } ?>
-            <a href="<?= $url ?>" class="col animate-pulse-hover mt-3">
-                <div class="card card-body d-flex flex-column justify-content-center align-items-center">
-                    <i class="bi bi-<?= $nav['icon'] ?> fs-1"></i>
-                    <span><?= $this->Locale->get($nav['label']); ?></span>
+<?php
+function gen($route, $nav){
+    if(empty($nav['link'])) return '';
+    if (strpos($route, '.') !== false) { $url = 'https://'.$nav['link']; } else { $url = $nav['link']; }
+    $html = '<a href="'.$url.'" class="col">
+                <div class="card">
+                    <i class="bi bi-'.$nav['icon'].' fs-1"></i>
+                    <span>'.$nav['label'].'</span>
                 </div>
-            </a>
+            </a>';
+    return $html;
+}
+?>
+<article class="library" id="layout">
+    <div class="row row-cols-1 row-cols-md-4 row-cols-lg-6">
+        <?php foreach($this->Builder->menu('library', '/library', 1) as $route => $nav): ?>
+            <?= gen($route, $nav) ?>
         <?php endforeach; ?>
-    <div>
-</div>
-<script>
-    $(document).ready(function(){
-
-        // Select Grid
-        const grid = $('#grid');
-
-        // Add Grid to Search
-        builder.Search.add(grid);
-
-        // Add Search Results
-        grid.find('a').each(function(){
-            builder.Search.set($(this));
-        });
-    });
-</script>
+    </div>
+</article>
